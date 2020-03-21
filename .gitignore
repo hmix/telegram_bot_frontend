@@ -6,3 +6,6 @@
 corona.code-workspace
 .vscode/
 
+.idea
+__pycache__
+config.py
