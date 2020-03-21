@@ -14,7 +14,8 @@ https://t.me/humanbios0k
 
 """
 
-import logging
+import logging.config
+import yaml
 import textwrap
 
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove
@@ -29,11 +30,10 @@ from telegram.ext import (
 from config import settings
 
 
-# enable logging
-logging.basicConfig(
-    format="{asctime} {name} {levelname} {message}", style="{", level=logging.INFO
-)
-logger = logging.getLogger(__name__)
+with open("logger_config.yaml", "r") as stream:
+    LOGGING = yaml.safe_load(stream.read())
+
+logging.config.dictConfig(LOGGING)
 
 # definitions
 FEEL_OK, COUGH_FEVER, STRESSED_ANXIOUS, WANNA_HELP, TELL_FRIENDS = range(5)
@@ -159,7 +159,7 @@ conv_handler = ConversationHandler(
 def main():
     """the main event loop"""
 
-    logger.info("Starting corona telegram-bot")
+    logging.info("Starting corona telegram-bot")
 
     updater = Updater(token=settings.TELEGRAM_BOT_TOKEN, use_context=True)
     dispatcher = updater.dispatcher
