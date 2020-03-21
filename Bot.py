@@ -56,10 +56,6 @@ yes_no_keyboard = ReplyKeyboardMarkup([["Yes", "No"]])
 yesfilter = Filters.regex('^Yes$')
 nofilter = Filters.regex('^No$')
 
-doctor_room = -403662743
-psychologist_room = -428911749
-newmembers_room = -403519635
-
 
 def cancel(update, context):
     update.message.reply_text('Bye! I hope we can talk again some day.', reply_markup=ReplyKeyboardRemove())
