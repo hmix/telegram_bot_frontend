@@ -67,41 +67,14 @@ def start(update: telegram.Update, context: CallbackContext):
 def forward_to_room(update, context):
     context.bot.send_message(chat_id='@humanbios0k', text=update.message.text)
 
+# TODO:
+# def error_callback(update, context):
+#     logger.warning(f'Update "{update}" caused error "{context.error}"')
 
+# def job_callback(context):
+#     job = context.job
+#     context.bot.send_message(SOMEONE, job.context)
 
-def get_url(url):
-    response = requests.get(url)
-    content = response.content.decode("utf8")
-    return content
-
-def get_json_from_url(url):
-    content = get_url(url)
-    return json.loads(content)
-
-def get_updates(offset=None, url=URL, timeout=10):
-    url = f"{url}/getUpdates?timeout={timeout}"
-    if offset:
-        url = f"{url}&offset={offset}"
-    return get_json_from_url(url)
-
-def send_message(text, chat_id, url=URL):
-    get_url(f"{url}/sendMessage?text={text}&chat_id={chat_id}")
-
-def get_last_update_id(updates):
-    update_ids = []
-    for update in updates["result"]:
-        update_ids.append(int(update["update_id"]))
-    return max(update_ids)
-
-
-def echo_all(updates):
-    for update in updates["result"]:
-        try:
-            text = update["message"]["text"]
-            chat = update["message"]["chat"]["id"]
-            send_message(text, chat)
-        except Exception as e:
-            print(e)
 
 
 # main loop
@@ -113,37 +86,18 @@ def main():
     print(f'>>> DEBUG: {bot.get_updates()}')
     logger.info('logging functional')
     
-    last_update_id = None
-    while True:
-        updates = get_updates(last_update_id)
-        if len(updates["result"]) > 0:
-            last_update_id = get_last_update_id(updates) + 1
-            echo_all(updates)
-        time.sleep(0.5)
+    updater = Updater(TELEGRAM_BOT_CORONA_TOKEN, use_context=True)
+    dispatcher = updater.dispatcher
+
+    dispatcher.add_handler(CommandHandler('start',start))
+
+    # TODO: message_handler -> FilterClass ->
+
+    updater.start_polling()
+    updater.idle()
 
 
 if __name__ == '__main__':
     main()
 
 # TODO: translation api returns -> None MEDIC CARE
-
-
-## example methods below
-
-# def error_callback(update, context):
-#     logger.warning('Update "%s" caused error "%s"', update, context.error)
-
-
-# def job_callback(context):
-#     job = context.job
-#     context.bot.send_message(SOMEONE, job.context)
-
-
-#updater = Updater(TELEGRAM_BOT_CORONA_TOKEN, use_context=True)
-#dispatcher = updater.dispatcher
-
-# dp.add_handler(telegram.ext.CommandHandler('hello',hello))
-# updater.start_polling()
-# updater.idle()
-
-
