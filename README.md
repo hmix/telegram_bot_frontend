@@ -2,6 +2,8 @@
 
 the repository is using poetry
 
+install with `poetry install`
+
 environment variables are set via an `.env` file
 
 collaborative markdown pad:
