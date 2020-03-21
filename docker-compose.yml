@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  telebot: &telebot
+    build:
+      context: .
+      dockerfile: ./compose/telebot/Dockerfile
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    environment:
+      - USE_DOCKER=yes
+    ports:
+      - "8000:8000"
+    networks:
+      - telegram_bot
+    command: /start
+
+networks:
+  telegram_bot:
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.21.0.1/24"
