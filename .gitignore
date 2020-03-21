@@ -4,6 +4,7 @@
 
 # vscode
 corona.code-workspace
+.vscode/
 
 .idea
 __pycache__
