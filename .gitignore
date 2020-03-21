@@ -7,3 +7,4 @@ corona.code-workspace
 
 .idea
 __pycache__
+config.py
