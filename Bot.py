@@ -9,10 +9,9 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, Conve
 import config
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                     level=logging.INFO)
-Token = ''
-bot = telegram.Bot(token=Token)
-updater = Updater(token=Token, use_context=True)
+                    level=logging.DEBUG)
+
+updater = Updater(token=config.BOT_TOKEN, use_context=True)
 dispatcher = updater.dispatcher
 FEEL_OK, COUGH_FEVER, STRESSED_ANXIOUS, WANNA_HELP, TELL_FRIENDS = range(5)
 
