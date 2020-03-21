@@ -1,10 +1,22 @@
 # telegram_bot_frontend
 
-the repository is using poetry
+sets up a bot that asks the user for help and sends her to the corresponding channel
 
-install with `poetry install`
+- medical-room
+- pyschologist
+- room for new members
 
-environment variables are set via an `.env` file
+## installation & setup
+
+the repository is using a docker container (with a poetry-environment inside)
+
+build the container with `docker-compose build`
+
+set the environment variables in the `.env` file (see: `.env.example`)
+
+start with `docker-compose up`
+
+## shared-pads
 
 collaborative markdown pad:
 https://notes.status.im/_zy_XbciTQqQDzVrnTJ7TA?edit
