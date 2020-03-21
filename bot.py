@@ -34,6 +34,7 @@ filter_yes = Filters.regex("^Yes$")
 filter_no = Filters.regex("^No$")
 
 
+# methods & commands
 def cancel(update, context):
     TEXT_CANCEL = """
         Bye! I hope we can talk again some day.
@@ -41,12 +42,10 @@ def cancel(update, context):
     update.message.reply_text(text=textwrap.dedent(TEXT_CANCEL), reply_markup=ReplyKeyboardRemove())
     return ConversationHandler.END
 
-
 def are_you_ok(update, context):
     TEXT_ARE_YOU_OK = "Hi! Are you feeling Ok?"
     update.message.reply_text(text=textwrap.dedent(TEXT_ARE_YOU_OK), reply_markup=yes_no_keyboard)
     return FEEL_OK
-
 
 def cough(update, context):
     TEXT_COUGH = "Oh no, I'm sorry about that! Are you having cough or fever?"
@@ -55,24 +54,20 @@ def cough(update, context):
     )
     return COUGH_FEVER
 
-
 def stressed(update, context):
     TEXT_STRESSED = "Good! Are you feeling stressed or anxious?"
     update.message.reply_text(text=textwrap.dedent(TEXT_STRESSED), reply_markup=yes_no_keyboard)
     return STRESSED_ANXIOUS
-
 
 def wanna_help(update, context):
     TEXT_WANNA_HELP = "That's great! Do you wanna help?"
     update.message.reply_text(text=textwrap.dedent(TEXT_WANNA_HELP), reply_markup=yes_no_keyboard)
     return WANNA_HELP
 
-
 def bye(update, context):
     TEXT_BYE = "Okay, Bye!"
     update.message.reply_text(text=textwrap.dedent(TEXT_BYE), reply_markup=ReplyKeyboardRemove())
     return ConversationHandler.END
-
 
 def doctors_room(update, context):
     user = update.effective_user
@@ -82,7 +77,6 @@ def doctors_room(update, context):
     update.message.reply_text("Forwarded your request to the doctor's room!", reply_markup=ReplyKeyboardRemove())
     return ConversationHandler.END
 
-
 def psychologists_room(update, context):
     user = update.effective_user
     context.bot.send_message(
@@ -90,7 +84,6 @@ def psychologists_room(update, context):
     )
     update.message.reply_text("Forwarded your request to the psychologists' room!", reply_markup=ReplyKeyboardRemove())
     return ConversationHandler.END
-
 
 def new_members_room(update, context):
     user = update.effective_user
@@ -124,8 +117,9 @@ conv_handler = ConversationHandler(
     fallbacks=[CommandHandler("cancel", cancel)],
 )
 
-# main loop
+
 def main():
+    """the main event loop"""
 
     logger.info('Starting corona telegram-bot')
 
