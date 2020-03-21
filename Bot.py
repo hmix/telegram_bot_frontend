@@ -1,11 +1,12 @@
 # spec https://notes.status.im/_zy_XbciTQqQDzVrnTJ7TA?edit
 
-
-import telegram
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+import logging
 from time import sleep
 
-import logging
+from telegram import (ReplyKeyboardMarkup, ReplyKeyboardRemove)
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, ConversationHandler
+
+import config
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                      level=logging.INFO)
